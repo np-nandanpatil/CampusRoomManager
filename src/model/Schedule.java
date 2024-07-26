@@ -37,7 +37,7 @@ public class Schedule {
 }
 
 
-// Or I can change this Schedule class to a record class and make this code even less number of lines
-// and then the code will be something like
+// for the above code I can change this Schedule class to a record class and make this code less in number of lines
+// then the record class will be like...
 // public record Schedule(int id, int roomId, String semester, String className, boolean occupied) {
 // }

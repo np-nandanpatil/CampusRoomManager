@@ -49,8 +49,7 @@ public class SearchUI extends JFrame {
             List<Schedule> schedules = scheduleDAO.searchSchedules(capacity, hasProjector);
             resultArea.setText("");
             for (Schedule schedule : schedules) {
-                resultArea.append("Room ID: " + schedule.getRoomId() + ", Semester: " + schedule.getSemester() +
-                        ", Class: " + schedule.getClassName() + ", Occupied: " + schedule.isOccupied() + "\n");
+                resultArea.append("Room ID: " + schedule.getRoomId() + ", Semester: " + schedule.getSemester() + ", Class: " + schedule.getClassName() + ", Occupied: " + schedule.isOccupied() + "\n");
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -58,69 +57,3 @@ public class SearchUI extends JFrame {
         }
     }
 }
-
-
-//
-//package ui;
-//
-//import dao.RoomDAO;
-//import model.Room;
-//
-//import javax.swing.*;
-//import java.awt.*;
-//import java.awt.event.ActionEvent;
-//import java.awt.event.ActionListener;
-//import java.util.List;
-//
-//public class SearchUI extends JFrame {
-//    private JTextField searchField;
-//    private JTextArea resultArea;
-//    private RoomDAO roomDAO;
-//
-//    public SearchUI() {
-//        roomDAO = new RoomDAO();
-//
-//        setTitle("Search Available Rooms");
-//        setSize(500, 400);
-//        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//        setLocationRelativeTo(null);
-//
-//        searchField = new JTextField(20);
-//        resultArea = new JTextArea();
-//
-//        JButton searchButton = new JButton("Search");
-//        searchButton.addActionListener(new ActionListener() {
-//            @Override
-//            public void actionPerformed(ActionEvent e) {
-//                searchAndDisplayRooms();
-//            }
-//        });
-//
-//        JPanel panel = new JPanel();
-//        panel.add(new JLabel("Search:"));
-//        panel.add(searchField);
-//        panel.add(searchButton);
-//
-//        add(panel, BorderLayout.NORTH);
-//        add(new JScrollPane(resultArea), BorderLayout.CENTER);
-//    }
-//
-//    private void searchAndDisplayRooms() {
-//        String searchTerm = searchField.getText();
-//        List<Room> rooms = roomDAO.searchAvailableRooms(searchTerm); // Implement this method in RoomDAO
-//        resultArea.setText("");
-//
-//        for (Room room : rooms) {
-//            resultArea.append(room.toString() + "\n");
-//        }
-//    }
-//
-//    public static void main(String[] args) {
-//        SwingUtilities.invokeLater(new Runnable() {
-//            @Override
-//            public void run() {
-//                new SearchUI().setVisible(true);
-//            }
-//        });
-//    }
-//}
