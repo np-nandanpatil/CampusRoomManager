@@ -83,6 +83,6 @@ Once the application is running, you can:
 ## Contributing
 
 If you'd like to help improve CampusRoomManager, please fork the repository and create a pull request.<br>
-**Well, as a student this was all that I could come up with while I built this along with learning these technologies for
-the first time, so it is not so efficient, there are a lot of things that can be upgraded in this project, and It'd be great
-if you like to do those upgrades**
+**Well, as a student (beginner Java learner) this was all that I could come up with while I was building this while parallelly learning these technologies for
+the first time, hence this code is not so efficient, there are a lot of things that can be upgraded in this project, and It'd be great
+if you like to do any upgrades**
