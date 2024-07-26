@@ -6,8 +6,8 @@ import java.sql.SQLException;
 
 public class DBConnection {
     private static final String URL = "jdbc:mysql://localhost:3306/CollegeRoomManagementDB?serverTimezone=UTC";
-    private static final String USER = "username";  // use your username here
-    private static final String PASSWORD = "password"; // // use your password here
+    private static final String USER = "root";  // use your username here
+    private static final String PASSWORD = "myROOTpass"; // // use your password here
 
     static {
         try {
