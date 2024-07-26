@@ -1,6 +1,7 @@
 # CampusRoomManager
 
-CampusRoomManager is a simple and user-friendly application designed to manage classroom schedules and room occupancy.
+CampusRoomManager is a simple and user-friendly application designed to manage classroom schedules and room occupancy.<br>
+I along with my group built this platform as a part of our Advanced Java class mini project.
 
 ## Table of Contents
 
@@ -82,6 +83,6 @@ Once the application is running, you can:
 ## Contributing
 
 If you'd like to help improve CampusRoomManager, please fork the repository and create a pull request.<br>
-**Well as a student this was all that I could come up with while I built this along with learning these technologies for
-the first time, so it is not so efficient, there are a lot things that can be upgraded in this project and It'd be great
-if you like to do thosse upgrades**
+**Well, as a student this was all that I could come up with while I built this along with learning these technologies for
+the first time, so it is not so efficient, there are a lot of things that can be upgraded in this project, and It'd be great
+if you like to do those upgrades**
