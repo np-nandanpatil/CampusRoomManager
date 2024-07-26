@@ -10,7 +10,6 @@ CampusRoomManager is a simple and user-friendly application designed to manage c
 - [Installation](#installation)
 - [Usage](#usage)
 - [Contributing](#contributing)
-- [License](#license)
 
 ## Introduction
 Scheduling classrooms and managing room occupancy can be a headache for educational institutions. CampusRoomManager aims to make this process easy. With this tool, you can add, delete, and search for schedules.
