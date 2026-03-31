@@ -1,88 +1,208 @@
+Looking at the existing README against the actual codebase, I found several inaccuracies and missing information. Here's a corrected and more comprehensive README:
+
 # CampusRoomManager
 
-CampusRoomManager is a simple and user-friendly application designed to manage classroom schedules and room occupancy.<br>
-I along with my group built this platform as a part of our Advanced Java class mini project.
+A Java Swing-based desktop application for managing classroom schedules and room occupancy in educational institutions. This project implements a complete CRUD system with MySQL database integration using a layered architecture pattern.
 
 ## Table of Contents
 
-- [Introduction](#introduction)
+- [Overview](#overview)
 - [Features](#features)
+- [Architecture](#architecture)
 - [Technologies Used](#technologies-used)
+- [Prerequisites](#prerequisites)
 - [Installation](#installation)
+- [Database Setup](#database-setup)
+- [Configuration](#configuration)
 - [Usage](#usage)
+- [Project Structure](#project-structure)
 - [Contributing](#contributing)
 
-## Introduction
+## Overview
 
-Scheduling classrooms and managing room occupancy can be a headache for educational institutions. CampusRoomManager aims
-to make this process easy. With this tool, you can add, delete, and search for schedules.
+CampusRoomManager is designed to streamline classroom scheduling and room management for educational institutions. The application provides a simple graphical interface for administrators to manage rooms, create schedules, and search for available rooms based on specific criteria.
 
 ## Features
 
-- **Room Management**: Add, update, and delete rooms with details like room ID, name, capacity, and whether it has a
-  projector.
-- **Schedule Management**: Add new schedules, delete existing ones, and search for available rooms. Prevents scheduling
-  conflicts by checking room occupancy status.
-- **User Interface**: Simple and intuitive interface built with Swing.
+- **Room Management**: 
+  - Add new rooms with name, capacity, and projector availability
+  - View all existing rooms
+  - Room data persistence with MySQL database
+
+- **Schedule Management**: 
+  - Create schedules linking rooms with semesters and classes
+  - Track room occupancy status
+  - Dropdown selection of available rooms
+
+- **Room Search**: 
+  - Search for available rooms by minimum capacity
+  - Filter rooms by projector availability
+  - Display search results with schedule information
+
+- **Database Integration**: 
+  - Full CRUD operations using DAO pattern
+  - MySQL database with proper connection management
+  - Prepared statements for SQL injection prevention
+
+## Architecture
+
+The application follows a layered architecture:
+- **Presentation Layer**: Swing UI components (`ui` package)
+- **Business Layer**: Model classes (`model` package)
+- **Data Access Layer**: DAO classes for database operations (`dao` package)
+- **Database Layer**: MySQL connection management (`db` package)
 
 ## Technologies Used
 
-- **Java**: For both front-end and back-end development.
-- **MySQL**: For database management.
-- **Swing**: For the graphical user interface.
-- **JDBC**: For connecting to the MySQL database.
+- **Java SE**: Core application development
+- **MySQL**: Database management system
+- **JDBC**: Database connectivity
+- **Swing**: GUI framework
+- **MySQL Connector/J 9.0.0**: MySQL JDBC driver
+
+## Prerequisites
+
+- Java Development Kit (JDK) 8 or higher
+- MySQL Server 5.7 or higher
+- MySQL Connector/J 9.0.0 (included in project)
+- IDE (IntelliJ IDEA, Eclipse, or VS Code recommended)
 
 ## Installation
 
-To get started with CampusRoomManager, follow these steps:
-
 1. **Clone the repository**:
-    ```sh
-    git clone https://github.com/np-nandanpatil/CampusRoomManager.git
-    ```
-2. **Open the project in your preferred Java IDE** (I'd prefer IntelliJ IDEA/VS code).
+   ```bash
+   git clone https://github.com/np-nandanpatil/CampusRoomManager.git
+   cd CampusRoomManager
+   ```
 
-3. **Set up the MySQL database**:
-    - Create a database named `collegeroommanagementdb`.
-    - Import the provided SQL script to set up the necessary tables.
+2. **Open the project**:
+   - Import the project into your preferred Java IDE
+   - Ensure the MySQL Connector/J library is properly loaded
 
-4. **Update the database connection settings**:
-    - Open the `DBConnection.java` file.
-    - Update the database URL, username, and password to match your MySQL setup.
+3. **Verify dependencies**:
+   - Check that `mysql-connector-j-9.0.0.jar` is in your classpath
+   - The library configuration should be in `.idea/libraries/mysql_connector_j_9_0_0.xml`
 
-5. **Build and run the project**:
-    - Compile and run the `Main.java` or `MainUI.java` to start the application.
+## Database Setup
+
+1. **Create the database**:
+   ```sql
+   CREATE DATABASE CollegeRoomManagementDB;
+   USE CollegeRoomManagementDB;
+   ```
+
+2. **Run the SQL script**:
+   - Execute the SQL script located at `DBcode/db.sql`
+   - This will create the necessary `Room` and `Schedule` tables
+
+3. **Expected table structure**:
+   - **Room**: `room_id`, `name`, `capacity`, `has_projector`
+   - **Schedule**: `schedule_id`, `room_id`, `semester`, `class`, `occupied`
+
+## Configuration
+
+1. **Update database credentials**:
+   - Open `src/db/DBConnection.java`
+   - Modify the following constants:
+   ```java
+   private static final String URL = "jdbc:mysql://localhost:3306/CollegeRoomManagementDB?serverTimezone=UTC";
+   private static final String USER = "your_username";
+   private static final String PASSWORD = "your_password";
+   ```
+
+2. **Ensure MySQL service is running** on your system
 
 ## Usage
 
-Once the application is running, you can:
+### Running the Application
 
-- **Manage Rooms**: Add, update, and delete room details.
-- **Manage Schedules**: Add new schedules, delete existing ones, and search for available rooms.
+1. **Compile and run**:
+   ```bash
+   javac -cp ".:mysql-connector-j-9.0.0.jar" src/**/*.java
+   java -cp ".:mysql-connector-j-9.0.0.jar:src" Main
+   ```
 
-### Adding a Room
+2. **Or run from IDE**:
+   - Execute `src/Main.java` or `src/ui/MainUI.java`
 
-1. Click on Room Management.
-2. Enter the room details (Room name(Room number), capacity, projector availability).
-3. Click "Add Room".
+### Application Workflow
 
-### Adding a Schedule
+#### Main Menu
+The application opens with three main options:
+- Room Management
+- Schedule Management  
+- Search Available Rooms
 
-1. Click on Schedule Management.
-2. Enter the schedule details
-    * Select room
-    * Enter semester, class name(subject name)
-3. Click "Add Schedule".
+#### Room Management
+1. Click "Room Management"
+2. Fill in room details:
+   - **Room Name**: Room identifier/number
+   - **Capacity**: Maximum occupancy
+   - **Has Projector**: Check if projector available
+3. Click "Add Room" to save
 
-### Searching for Available Rooms
+#### Schedule Management
+1. Click "Schedule Management"
+2. Configure schedule:
+   - **Room**: Select from dropdown of existing rooms
+   - **Semester**: Enter semester information
+   - **Class**: Enter subject/class name
+   - **Occupied**: Set current occupancy status
+3. Click "Add Schedule" to save
 
-1. Click on Search Available Rooms.
-2. Enter your search criteria in the search field (Minimum capacity, projector needed or not).
-3. Click "Search".
+#### Searching Rooms
+1. Click "Search Available Rooms"
+2. Set search criteria:
+   - **Minimum Capacity**: Required room size
+   - **Has Projector**: Filter by projector availability
+3. Click "Search" to view results
+4. Results display room schedules matching criteria
+
+## Project Structure
+
+```
+CampusRoomManager/
+├── .idea/                          # IntelliJ IDEA configuration
+├── DBcode/
+│   └── db.sql                      # Database schema script
+├── src/
+│   ├── Main.java                   # Application entry point
+│   ├── dao/
+│   │   ├── RoomDAO.java           # Room database operations
+│   │   └── ScheduleDAO.java       # Schedule database operations
+│   ├── db/
+│   │   └── DBConnection.java      # Database connection utility
+│   ├── model/
+│   │   ├── Room.java              # Room entity class
+│   │   └── Schedule.java          # Schedule entity class
+│   └── ui/
+│       ├── MainUI.java            # Main application window
+│       ├── RoomManagementUI.java  # Room management interface
+│       ├── ScheduleManagementUI.java # Schedule management interface
+│       └── SearchUI.java          # Room search interface
+├── CampusRoomManager.iml          # IntelliJ module file
+└── README.md
+```
 
 ## Contributing
 
-If you'd like to help improve CampusRoomManager, please fork the repository and create a pull request.<br>
-**Well, as a student (beginner Java learner) this was all that I could come up with while I was building this while parallelly learning these technologies for
-the first time, hence this code is not so efficient, there are a lot of things that can be upgraded in this project, and It'd be great
-if you like to do any upgrades**
+This project was developed as a learning exercise for Advanced Java concepts. Contributions are welcome to improve:
+
+- Code efficiency and best practices
+- Additional features (room updates, schedule deletion, etc.)
+- UI/UX improvements
+- Error handling and validation
+- Unit tests implementation
+
+To contribute:
+1. Fork the repository
+2. Create a feature branch
+3. Make your changes
+4. Submit a pull request
+
+## Notes
+
+- The application currently supports basic CRUD operations
+- Some advanced features like room updates and schedule deletion may need implementation
+- Input validation could be enhanced for better user experience
+- Consider implementing connection pooling for production use
